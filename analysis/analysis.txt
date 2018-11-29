@@ -1,4 +1,4 @@
-Your name
+Mary Wang
 Your netid
 
 Copy/Paste results from PercolationStats using PercolationDFS
