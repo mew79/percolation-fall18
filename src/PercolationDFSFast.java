@@ -7,11 +7,28 @@ public class PercolationDFSFast extends PercolationDFS{
 	
 	@Override 
 	protected void updateOnOpen(int row, int col) {
-	
-		if (row == 0 || myGrid[row-1][col] == FULL ||(myGrid[row+1][col] == FULL) || 
-				(myGrid[row][col-1] == FULL) || (myGrid[row][col+1] == FULL)) {
-			dfs(row, col);
+		
+		if (!inBounds(row,col)) {
+			return;
 		}
+	
+		if (row == 0) {
+			dfs(row,col);
+			return;
+		}
+		int[] rowDelta = {0,0,-1,1};
+		int[] colDelta = {0,0,-1,1};
+		
+		for (int i = 0; i < rowDelta.length; i ++) {
+			int newRow = row + rowDelta[i];
+			int newCol = col + colDelta[i];
+			if (myGrid[newRow][newCol] == FULL) {
+				dfs(row,col);
+				return;
+			}
+		}
+		
+		
 	
 	}
 	
