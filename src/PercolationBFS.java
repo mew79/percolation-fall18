@@ -12,6 +12,12 @@ public class PercolationBFS extends PercolationDFSFast{
 		int[] rowDelta = {-1,1,0,0};
 		int[] colDelta = {0,0,-1,1};
 		
+		if (!inBounds(row,col)) {
+			return ;
+		}
+		if (myGrid[row][col] == FULL || !isOpen(row,col)) {
+			return ;
+		}
 		Queue<Integer> qp = new LinkedList<Integer>();
 		myGrid[row][col] = FULL;
 		qp.add(row *myGrid.length + col);
@@ -21,11 +27,12 @@ public class PercolationBFS extends PercolationDFSFast{
 			int newCol = num%myGrid.length;
 			
 			for (int i = 0; i < rowDelta.length; i ++) {
-				row = newRow + rowDelta[i];
-				col = newCol + colDelta[i];
-				if (inBounds(row,col) && isOpen(row, col) && myGrid[row][col] != FULL) {
-					myGrid[row][col] = FULL;
-					qp.add(row *myGrid.length + col);
+				
+				int nrow = newRow + rowDelta[i];
+				int ncol = newCol + colDelta[i];
+				if (inBounds(nrow,ncol) && isOpen(nrow, ncol) && myGrid[nrow][ncol] != FULL) {
+					myGrid[nrow][ncol] = FULL;
+					qp.add(nrow *myGrid.length + ncol);
 				}
 			}
 		}
